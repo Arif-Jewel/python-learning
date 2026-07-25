@@ -1,7 +1,3 @@
-print("=" * 40)
-print("    SECURITY REPORT GENERATOR")
-print("=" * 40)
-
 # Functions ==================================
 def ask_user():
     name = input("Enter your name: ")
@@ -49,7 +45,7 @@ def calculate_risk(devices):
 def generate_report(name, department, devices, risk_level):
     print()
     print("=" * 40)
-    print("    SECURITY REPORT")
+    print("    SECURITY REPORT GENERATOR")
     print("=" * 40)
 
     print("Name:", name)
