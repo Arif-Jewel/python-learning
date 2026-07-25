@@ -2,6 +2,7 @@ print("=" * 40)
 print("    SECURITY REPORT GENERATOR")
 print("=" * 40)
 
+# Functions ==================================
 def ask_user():
     name = input("Enter your name: ")
     department = input("Enter your department: ")
@@ -45,26 +46,38 @@ def calculate_risk(devices):
     else:
         return "LOW"
 
-user_name, user_department = ask_user()
+def generate_report(name, department, devices, risk_level):
+    print()
+    print("=" * 40)
+    print("    SECURITY REPORT")
+    print("=" * 40)
 
-print()
-print("User Information")
-print("Name: ", user_name)
-print("Department: ", user_department)
+    print("Name:", name)
+    print("Department:", department)
+
+    print()
+    print("Device Scan")
+
+    for device in devices:
+        print(
+            device["name"],
+            "-",
+            device["status"]
+        )
+    print()
+    print("Security Assessment")
+    print("Risk Level:", risk_level)
+
+# Main program ========================
+user_name, user_department = ask_user()
 
 devices = scan_devices()
 
-print()
-print("Device Scan")
-
-for device in devices:
-    if device["status"] == "Warning":
-        print(device["name"], "-",  device["status"])
-    else:
-        print(device["name"], "-", device["status"])
-
 risk_level = calculate_risk(devices)
 
-print()
-print("Security Assessment")
-print("Risk Level: ", risk_level)
+generate_report(
+    user_name,
+    user_department,
+    devices,
+    risk_level
+)
