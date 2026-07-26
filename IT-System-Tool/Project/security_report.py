@@ -42,7 +42,16 @@ def calculate_risk(devices):
     else:
         return "LOW"
 
-def generate_report(name, department, devices, risk_level):
+def calculate_score(devices):
+    score = 100
+
+    for device in devices:
+        if device["status"] == "Warning":
+            score -= 25
+
+    return score
+
+def generate_report(name, department, devices, risk_level, score):
     print()
     print("=" * 40)
     print("    SECURITY REPORT GENERATOR")
@@ -62,6 +71,7 @@ def generate_report(name, department, devices, risk_level):
         )
     print()
     print("Security Assessment")
+    print("Security Score:", score,"/100")
     print("Risk Level:", risk_level)
 
 # Main program ========================
@@ -71,9 +81,12 @@ devices = scan_devices()
 
 risk_level = calculate_risk(devices)
 
+security_score = calculate_score(devices)
+
 generate_report(
     user_name,
     user_department,
     devices,
-    risk_level
+    risk_level,
+    security_score
 )
